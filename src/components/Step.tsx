@@ -1,7 +1,8 @@
 import React from 'react';
 import s from "./Step.module.css";
-import {IStep, todoSlice} from "../store/redusers/todoSlice";
+import {todoSlice} from "../store/redusers/todoSlice";
 import {useAppDispatch} from "../hooks/redux";
+import {IStep} from "../store/redusers/todoTypes";
 
 type Props = {
     todoId: string,

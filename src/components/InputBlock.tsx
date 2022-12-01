@@ -1,20 +1,14 @@
 import s from "./InputBlock.module.css";
 import React, {useState} from "react";
-import {useAppDispatch} from "../hooks/redux";
 
 type Props = {
-    callbackAction: any
-    todoId?: string
+    callbackFunction: (body:string)=> void
     placeHolderText: string
 }
 export const InputBlock: React.FC<Props> = (p:Props) => {
-    const dispatch = useAppDispatch()
     const [inputValue, setInputValue] = useState('')
-
     const onButtonAdd: ()=>void = () => {
-        p.todoId
-            ? dispatch(p.callbackAction({body: inputValue, todoId: p.todoId}))
-            : dispatch(p.callbackAction(inputValue))
+        p.callbackFunction(inputValue)
         setInputValue('')
     }
     return (

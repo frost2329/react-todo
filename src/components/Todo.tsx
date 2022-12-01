@@ -1,9 +1,11 @@
-import {ITodo, todoSlice, toggleStatus} from "../store/redusers/todoSlice";
+import {todoSlice} from "../store/redusers/todoSlice";
 import React, {useState} from "react";
 import {useAppDispatch} from "../hooks/redux";
 import s from './Todo.module.css'
 import {InputBlock} from "./InputBlock";
 import Step from "./Step";
+import {ITodo} from "../store/redusers/todoTypes";
+import {toggleStatus} from "../store/redusers/todoAsyncAC";
 
 type Props = {
     todo: ITodo
@@ -14,6 +16,9 @@ export const Todo: React.FC<Props> = (p:Props) => {
 
     const onToggleStatus: ()=>void = () => dispatch(toggleStatus(p.todo))
     const onRemove: ()=>void = () => dispatch(todoSlice.actions.removeTodo(p.todo.todoId))
+    const onAddStep: (body:string)=>void = (body:string) => {
+        dispatch(todoSlice.actions.setStep({body: body, todoId: p.todo.todoId}))
+    }
     return (
         <div className={s.root}>
             <div className={s.item}>
@@ -33,8 +38,7 @@ export const Todo: React.FC<Props> = (p:Props) => {
                                                                         step={step}/>
                         )}
                     </div>
-                    <InputBlock placeHolderText={'Добавить шаг'} callbackAction={todoSlice.actions.setStep}
-                                todoId={p.todo.todoId}/>
+                    <InputBlock placeHolderText={'Добавить шаг'} callbackFunction={onAddStep}/>
                 </div>
             )}
         </div>

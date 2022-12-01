@@ -1,15 +1,19 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import './App.module.css';
-import {useAppSelector} from "./hooks/redux";
+import {useAppDispatch, useAppSelector} from "./hooks/redux";
 import {todoSlice} from "./store/redusers/todoSlice";
 import {Todo} from "./components/Todo";
 import s from './App.module.css'
 import {InputBlock} from "./components/InputBlock";
 
 const App: React.FC = () => {
+    const dispatch = useAppDispatch()
     const isMount = useRef(false)
     const todoState = useAppSelector(state => state.todo)
-
+    const onAddTodo: (body:string)=>void = (body:string) => {
+        dispatch(todoSlice.actions.setTodo(body))
+        //postTodo(body);
+    }
     useEffect(() => {
         if (isMount) {
             window.localStorage.setItem('todoState', JSON.stringify(todoState))
@@ -26,7 +30,7 @@ const App: React.FC = () => {
         <div className={s.App}>
             <div className={s.wrapper_app}>
                 <div className={s.todos_wrapper}>
-                    <InputBlock placeHolderText={'Добавить задачу'} callbackAction={todoSlice.actions.setTodo}/>
+                    <InputBlock placeHolderText={'Добавить задачу'} callbackFunction={onAddTodo}/>
                     {todoState.todos.length > 0 && todoState.todos.map(todo => {
                         return <Todo key={todo.id} todo={todo}/>})}
                 </div>

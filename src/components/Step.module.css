@@ -1,0 +1,33 @@
+.root {
+    display: flex;
+    background-color: white;
+    align-items: center;
+    height: 30px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.button_status {
+    width: 22px;
+    height: 22px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+.button_status:disabled {
+    cursor: default;
+}
+.body {
+    width: 100%;
+    cursor: pointer;
+}
+.inactive {
+    text-decoration: line-through;
+}
+.button_remove {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    cursor: pointer;
+}

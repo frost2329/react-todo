@@ -1,0 +1,17 @@
+.App {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: blanchedalmond;
+  max-height: 1000px;
+}
+.wrapper_app {
+  display: flex;
+  max-width: 1200px;
+  background-color: azure;
+}
+.todos_wrapper {
+  background-color: beige;
+  width: 500px  ;
+}
+

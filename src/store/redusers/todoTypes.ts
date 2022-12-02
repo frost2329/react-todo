@@ -6,12 +6,10 @@ export type IStep = {
 
 export type ITodo = {
     id: string,
-    todoId: string
     body: string,
     status: boolean
     steps: IStep[]
 }
-
 
 export interface TodoState {
     todos: ITodo[]

@@ -1,11 +1,10 @@
-import {todoSlice} from "../store/redusers/todoSlice";
 import React, {useState} from "react";
 import {useAppDispatch} from "../hooks/redux";
 import s from './Todo.module.css'
 import {InputBlock} from "./InputBlock";
 import Step from "./Step";
 import {ITodo} from "../store/redusers/todoTypes";
-import {toggleStatus} from "../store/redusers/todoAsyncAC";
+import {addStep, removeTodo, toggleStatus} from "../store/redusers/todoAsyncTC";
 
 type Props = {
     todo: ITodo
@@ -15,9 +14,10 @@ export const Todo: React.FC<Props> = (p:Props) => {
     const [isEditMode, setIsEditMode] = useState(false)
 
     const onToggleStatus: ()=>void = () => dispatch(toggleStatus(p.todo))
-    const onRemove: ()=>void = () => dispatch(todoSlice.actions.removeTodo(p.todo.todoId))
+    const onRemove: ()=>void = () => dispatch(removeTodo(p.todo))
+
     const onAddStep: (body:string)=>void = (body:string) => {
-        dispatch(todoSlice.actions.setStep({body: body, todoId: p.todo.todoId}))
+        dispatch(addStep(p.todo, body))
     }
     return (
         <div className={s.root}>
@@ -33,8 +33,7 @@ export const Todo: React.FC<Props> = (p:Props) => {
                 <div>
                     <div className={s.steps_list}>
                         {p.todo.steps && p.todo.steps.map(step => <Step key={step.id}
-                                                                        todoId={p.todo.todoId}
-                                                                        todoStatus={p.todo.status}
+                                                                        todo={p.todo}
                                                                         step={step}/>
                         )}
                     </div>

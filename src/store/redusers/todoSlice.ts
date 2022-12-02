@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {IStep, ITodo, TodoState} from "./todoTypes";
+import {ITodo, TodoState} from "./todoTypes";
 
 const initialState: TodoState = {
     todos: [],
@@ -26,50 +26,15 @@ export const todoSlice = createSlice({
             state.todos = action.payload
         },
         setTodo(state, action) {
-            state.todos.push({
-                id: '',
-                todoId: Date.now().toString(),
-                body: action.payload,
-                status: true,
-                steps: []
-            })
+            let currentTodo: ITodo | undefined = state.todos.find(todo => todo.id === action.payload.id)
+            if (currentTodo) {
+                state.todos = state.todos.map(todo=> todo.id === action.payload.id ? action.payload : todo)
+            }else {
+                state.todos.push(action.payload)
+            }
         },
         removeTodo(state, action) {
-            state.todos = state.todos.filter(todo => todo.todoId !== action.payload)
-        },
-        setStatus(state, action) {
-            state.todos = state.todos.map(todo => {
-                if (todo.todoId === action.payload.todoId) {
-                    todo.status = action.payload.status
-                    todo.steps && (todo.steps = todo.steps.map(step => {
-                        step.status = action.payload.status
-                        return step
-                    }))
-                    return todo
-                }
-                return todo
-            })
-        },
-
-        setStep(state, action) {
-            const currentTodo: ITodo | undefined = state.todos.find(todo => todo.todoId === action.payload.todoId)
-            console.log(currentTodo)
-            currentTodo && currentTodo.steps.push({
-                id: Date.now().toString(),
-                status: true,
-                body: action.payload.body
-            })
-        },
-        removeStep(state, action) {
-            const currentTodo: ITodo | undefined = state.todos.find(todo => todo.todoId === action.payload.todoId)
-            currentTodo && (currentTodo.steps = currentTodo.steps.filter(step => step.id !== action.payload.id))
-        },
-        toggleStepStatus(state, action) {
-            const currentTodo: ITodo | undefined = state.todos.find(todo => todo.todoId === action.payload.todoId)
-            if (currentTodo) {
-                let currentStep: IStep | undefined = currentTodo.steps.find(step => step.id === action.payload.id)
-                currentStep && (currentStep.status = !currentStep.status)
-            }
+            state.todos = state.todos.filter(todo => todo.id !== action.payload)
         }
     }
 })

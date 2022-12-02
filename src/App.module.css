@@ -1,9 +1,14 @@
+body {
+  background-color: blanchedalmond;
+}
 .App {
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: blanchedalmond;
   max-height: 1000px;
+  margin-top: 100px;
+
 }
 .wrapper_app {
   display: flex;
@@ -11,7 +16,8 @@
   background-color: azure;
 }
 .todos_wrapper {
-  background-color: beige;
-  width: 500px  ;
+  background-color: azure;
+  width: 500px;
+  min-height: 500px;
 }
 

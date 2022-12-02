@@ -1,24 +1,18 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect} from 'react';
 import './App.module.css';
 import {useAppDispatch, useAppSelector} from "./hooks/redux";
-import {todoSlice} from "./store/redusers/todoSlice";
 import {Todo} from "./components/Todo";
 import s from './App.module.css'
 import {InputBlock} from "./components/InputBlock";
+import {getTodos, postTodo} from "./store/redusers/todoAsyncTC";
 
 const App: React.FC = () => {
     const dispatch = useAppDispatch()
-    const isMount = useRef(false)
     const todoState = useAppSelector(state => state.todo)
     const onAddTodo: (body:string)=>void = (body:string) => {
-        dispatch(todoSlice.actions.setTodo(body))
-        //postTodo(body);
+        dispatch(postTodo(body))
     }
-    useEffect(() => {
-        if (isMount) {
-            window.localStorage.setItem('todoState', JSON.stringify(todoState))
-        }
-        isMount.current = true}, [todoState])
+    useEffect(() => {dispatch(getTodos())},[])
 
     if (todoState.isLoading) {
         return <div>Загрузка</div>

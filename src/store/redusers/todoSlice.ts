@@ -23,9 +23,11 @@ export const todoSlice = createSlice({
             state.error = action.payload
         },
         setAllTodos(state, action) {
+            state.isLoading = false
             state.todos = action.payload
         },
         setTodo(state, action) {
+            state.isLoading = false
             let currentTodo: ITodo | undefined = state.todos.find(todo => todo.id === action.payload.id)
             if (currentTodo) {
                 state.todos = state.todos.map(todo=> todo.id === action.payload.id ? action.payload : todo)
@@ -34,6 +36,7 @@ export const todoSlice = createSlice({
             }
         },
         removeTodo(state, action) {
+            state.isLoading = false
             state.todos = state.todos.filter(todo => todo.id !== action.payload)
         }
     }

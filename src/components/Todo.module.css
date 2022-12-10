@@ -1,40 +1,57 @@
 .root {
-    margin-top: 10px;
 }
 .item {
     display: flex;
     background-color: white;
     align-items: center;
     height: 40px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
     position: relative;
 }
 .steps_item {
-    height: 30px;
+    height: 40px;
 }
 
-.button_status {
-    width: 22px;
-    height: 22px;
-    margin: 0 10px;
-    cursor: pointer;
-}
-.button_status:disabled {
-    cursor: default;
-}
 .body {
+    margin-left: 10px;
     width: 100%;
     cursor: pointer;
 }
 .inactive {
     text-decoration: line-through;
+    opacity: 50%;
 }
+.button_status {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: white;
+    border: 2px solid cornflowerblue;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    line-height: 20px;
+    padding: 0;
+}
+.success {
+    background-color: cornflowerblue;
+    opacity: 70%;
+}
+.button_status:disabled {
+    cursor: default;
+}
+
+
 .button_remove {
     width: 20px;
     height: 20px;
     position: absolute;
-    right: 15px;
+    right: 10px;
     top: 10px;
     cursor: pointer;
+    opacity: 70%;
+}
+.button_remove:hover {
+    opacity: 100%;
 }

@@ -1,3 +1,4 @@
+
 .root {
     height: 50px;
     position: relative;
@@ -9,15 +10,22 @@
     padding: 12px 20px;
     padding-left: 42px;
     width: 500px;
-    border-radius: 10px;
     font-size: 16px;
 }
 
 .button_add {
-    width: 70px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
+    font-size: 25px;
+    color: white;
     position: absolute;
-    right: 15px;
-    top: 15px;
+    right: 10px;
+    top: 10px;
     cursor: pointer;
+    border: 0;
+    opacity: 90%;
+    background-color: cornflowerblue;
+}
+.button_add:hover {
+    opacity: 100%;
 }

@@ -5,15 +5,20 @@ import {InputBlock} from "./InputBlock";
 import Step from "./Step";
 import {ITodo} from "../store/redusers/todoTypes";
 import {addStep, removeTodo, toggleStatus} from "../store/redusers/todoAsyncTC";
+import imageRemove from "../images/remove.png";
 
 type Props = {
     todo: ITodo
+    setIsSuccessOpen?: any
 }
 export const Todo: React.FC<Props> = (p:Props) => {
     const dispatch = useAppDispatch()
     const [isEditMode, setIsEditMode] = useState(false)
 
-    const onToggleStatus: ()=>void = () => dispatch(toggleStatus(p.todo))
+    const onToggleStatus: ()=>void = async () => {
+        await dispatch(toggleStatus(p.todo))
+        p.setIsSuccessOpen && p.setIsSuccessOpen(true)
+    }
     const onRemove: ()=>void = () => dispatch(removeTodo(p.todo))
 
     const onAddStep: (body:string)=>void = (body:string) => {
@@ -22,12 +27,14 @@ export const Todo: React.FC<Props> = (p:Props) => {
     return (
         <div className={s.root}>
             <div className={s.item}>
-                <button className={s.button_status} onClick={onToggleStatus}></button>
+                <button className={`${s.button_status} ${!p.todo.status && s.success}`} onClick={onToggleStatus}>
+                    {!p.todo.status && '✓'}
+                </button>
                     <span className={`${s.body} ${p.todo.status ? s.active : s.inactive}`}
                           onClick={() => setIsEditMode(!isEditMode)}>
                         {p.todo.body}
                     </span>
-                <button className={s.button_remove} onClick={onRemove}>x</button>
+                <img onClick={onRemove} className={s.button_remove} src={imageRemove} alt="remove"/>
             </div>
             {isEditMode && (
                 <div>
@@ -37,7 +44,7 @@ export const Todo: React.FC<Props> = (p:Props) => {
                                                                         step={step}/>
                         )}
                     </div>
-                    <InputBlock placeHolderText={'Добавить шаг'} callbackFunction={onAddStep}/>
+                    {p.todo.status && <InputBlock placeHolderText={'Добавить шаг'} callbackFunction={onAddStep}/>}
                 </div>
             )}
         </div>

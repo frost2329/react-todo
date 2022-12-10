@@ -10,9 +10,11 @@ export const getTodos = () => async (dispatch: AppDispatch) => {
         const url: string = `https://62f53aa6ac59075124ce14b4.mockapi.io/todos`;
         const response = await axios.get<ITodo[]>(url)
         dispatch(todoSlice.actions.setAllTodos(response.data))
-        dispatch(todoSlice.actions.setError(''))
     } catch (e: any) {
-        dispatch(todoSlice.actions.setError(e.message));
+        setTimeout(()=>{
+            dispatch(todoSlice.actions.setError(''))
+        }, 5000)
+        dispatch(todoSlice.actions.setError(e.message))
     }
 }
 
@@ -27,9 +29,11 @@ export const postTodo = (body: string) => async (dispatch: AppDispatch) => {
         }
         const response = await axios.post<ITodo>(url, data)
         dispatch(todoSlice.actions.setTodo(response.data))
-        dispatch(todoSlice.actions.setError(''))
     } catch (e: any) {
-        dispatch(todoSlice.actions.setError(e.message));
+        setTimeout(()=>{
+            dispatch(todoSlice.actions.setError(''))
+        }, 5000)
+        dispatch(todoSlice.actions.setError(e.message))
     }
 }
 
@@ -38,9 +42,11 @@ export const removeTodo = (todo: ITodo) => async (dispatch: AppDispatch) => {
         const url: string = `https://62f53aa6ac59075124ce14b4.mockapi.io/todos/${todo.id}`;
         const response = await axios.delete<ITodo>(url)
         dispatch(todoSlice.actions.removeTodo(response.data.id))
-        dispatch(todoSlice.actions.setError(''))
     } catch (e: any) {
-        dispatch(todoSlice.actions.setError(e.message));
+        setTimeout(()=>{
+            dispatch(todoSlice.actions.setError(''))
+        }, 5000)
+        dispatch(todoSlice.actions.setError(e.message))
     }
 }
 
@@ -52,9 +58,11 @@ export const toggleStatus = (todo: ITodo) => async (dispatch: AppDispatch) => {
         console.log(data);
         const response = await axios.put<ITodo>(url, data)
         dispatch(todoSlice.actions.setTodo(response.data))
-        dispatch(todoSlice.actions.setError(''));
     } catch (e: any) {
-        dispatch(todoSlice.actions.setError(e.message));
+        setTimeout(()=>{
+            dispatch(todoSlice.actions.setError(''))
+        }, 5000)
+        dispatch(todoSlice.actions.setError(e.message))
     }
 }
 
@@ -70,9 +78,11 @@ export const addStep = (todo: ITodo, body: string) => async (dispatch: AppDispat
         }
         const response = await axios.put<ITodo>(url, data)
         dispatch(todoSlice.actions.setTodo(response.data))
-        dispatch(todoSlice.actions.setError(''));
     } catch (e: any) {
-        dispatch(todoSlice.actions.setError(e.message));
+        setTimeout(()=>{
+            dispatch(todoSlice.actions.setError(''))
+        }, 5000)
+        dispatch(todoSlice.actions.setError(e.message))
     }
 }
 
@@ -82,9 +92,11 @@ export const removeStep = (todo: ITodo, stepId: string) => async (dispatch: AppD
         const data = {...todo, steps: todo.steps.filter(step => step.id !== stepId)}
         const response = await axios.put<ITodo>(url, data)
         dispatch(todoSlice.actions.setTodo(response.data))
-        dispatch(todoSlice.actions.setError(''));
     } catch (e: any) {
-        dispatch(todoSlice.actions.setError(e.message));
+        setTimeout(()=>{
+            dispatch(todoSlice.actions.setError(''))
+        }, 5000)
+        dispatch(todoSlice.actions.setError(e.message))
     }
 }
 
@@ -98,7 +110,10 @@ export const toggleStepStatus = (todo: ITodo, stepId: string) => async (dispatch
         const response = await axios.put<ITodo>(url, data)
         dispatch(todoSlice.actions.setTodo(response.data))
     } catch (e: any) {
-        dispatch(todoSlice.actions.setError(e.message));
+        setTimeout(()=>{
+            dispatch(todoSlice.actions.setError(''))
+        }, 5000)
+        dispatch(todoSlice.actions.setError(e.message))
     }
 }
 

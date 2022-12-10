@@ -19,7 +19,10 @@ export const InputBlock: React.FC<Props> = (p:Props) => {
                    value={inputValue}
                    placeholder={p.placeHolderText}>
             </input>
-            {inputValue && <button className={s.button_add} onClick={onButtonAdd}>Добавить</button>}
+            {inputValue &&<button className={`${s.button_add}`}
+                                  onClick={onButtonAdd}>
+                +
+            </button>}
         </div>
     )
 }
